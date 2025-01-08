@@ -79,8 +79,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'webstimulate_cms',                      
+        'USER': 'postgres',
+        'PASSWORD': 'POST$user#12',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
