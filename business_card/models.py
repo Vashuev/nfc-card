@@ -34,5 +34,5 @@ class BusinessCard(models.Model):
     seconday_color = models.CharField(max_length=7, default="#9E0505")  # Background of the details box
 
     def __str__(self):
-        return self.name + "" + str(self.unique_id)
+        return self.name + " " + str(self.unique_id)
 
