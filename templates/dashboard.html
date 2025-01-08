@@ -1,0 +1,323 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Card</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Add Font Awesome CDN -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  
+  <style>
+    body {
+      background: linear-gradient(135deg, #e0e0e0, {{card.primary_color}});
+      font-family: Arial, sans-serif;
+    }
+    .card-container {
+      max-width: 400px;
+      margin: 20px auto;
+      margin-bottom: 50px;
+      text-align: center;
+      border-radius: 20px;
+      background-color: #ffffff;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+    .logo {
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-bottom: 2px solid #e6e6e6;
+    }
+    .logo img {
+      max-width: 120px;
+    }
+    .profile-section {
+      background-color: {{card.seconday_color}};
+      padding: 30px 20px;
+      color: white;
+    }
+    .profile-section img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+    .profile-section h3 {
+      color: {{card.primary_color}};
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+    .profile-section p {
+      margin: 0;
+    }
+    .profile-section .contact {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #dbdbdb;
+    }
+    .social-buttons {
+      padding: 20px;
+    }
+    .social-buttons a {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      text-align: center;
+      border-radius: 25px;
+      font-size: 16px;
+      text-decoration: none;
+      background-color: {{card.primary_color}};
+      color: white;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    .social-buttons a:hover {
+      background-color: #ffffff;
+    }
+    .social-buttons a:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-link {
+      color: inherit; /* Keep the color consistent with the rest of the text */
+      text-decoration: none;
+    }
+
+    .contact-link:hover {
+      text-decoration: underline;
+    }
+
+    .edit_button {
+      margin-bottom: 50px;
+    }
+
+  </style>
+  <style>
+    /* Floating Buttons Container */
+    .floating-buttons {
+        position: fixed;
+        bottom: 60px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        pointer-events: none; /* So they don't block interaction with other elements */
+        z-index: 1000;
+    }
+
+    /* Left Button */
+    .floating-button.left-btn {
+        pointer-events: auto;
+        position: absolute;
+        left: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 30px;
+        padding: 10px 15px;
+        color: #333;
+        text-decoration: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s;
+    }
+
+    .floating-button.left-btn:hover {
+        background-color: #f7f7f7;
+    }
+
+    /* Right Button */
+    .floating-button.right-btn {
+        pointer-events: auto;
+        position: absolute;
+        right: 50px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background-color: #007bff;
+        border: none;
+        border-radius: 30px;
+        padding: 10px 15px;
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s;
+    }
+
+    .floating-button.right-btn:hover {
+        background-color: #0056b3;
+    }
+
+    /* Logo for Buttons */
+    .button-logo {
+        height: 20px;
+        width: auto;
+    }
+  </style>
+    
+</head>
+<body class="px-3">
+
+<div class="card-container">
+  <!-- Logo Section -->
+  <div class="logo">
+    <img src="{{card.company_logo.url}}" alt="Company Logo">
+  </div>
+
+  <!-- Profile Section -->
+  <div class="profile-section">
+    <img src="{{card.profile_image.url}}" alt="Profile Picture">
+    <h3>{{card.name}}</h3>
+    <p>{{card.designation}} @ <b>{{card.company_name}}</b></p>
+    <p class="mt-2">{{card.description}}</p>
+    <p class="contact mt-3">
+      <a href="tel:{{ card.contact_number }}" class="contact-link">{{ card.contact_number }}</a>
+    </p>
+  
+  </div>
+
+  <!-- Social Buttons -->
+  <div class="social-buttons text-center my-4">
+    <h3 class="mb-4">Quick Links</h3>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+        {% if card.facebook %}
+        <a href="{{ card.facebook }}" class="btn btn-light d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; border-radius: 50%;" target="_blank">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        {% endif %}
+    
+        {% if card.instagram %}
+        <a href="{{ card.instagram }}" class="btn btn-light d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; border-radius: 50%;" target="_blank">
+            <i class="fab fa-instagram"></i>
+        </a>
+        {% endif %}
+    
+        {% if card.twitter %}
+        <a href="{{ card.twitter }}" class="btn btn-light d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; border-radius: 50%;" target="_blank">
+            <i class="fab fa-twitter"></i>
+        </a>
+        {% endif %}
+    
+        {% if card.youtube %}
+        <a href="{{ card.youtube }}" class="btn btn-light d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; border-radius: 50%;" target="_blank">
+            <i class="fab fa-youtube"></i>
+        </a>
+        {% endif %}
+    
+        {% if card.reddit %}
+        <a href="{{ card.reddit }}" class="btn btn-light d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; border-radius: 50%;" target="_blank">
+            <i class="fab fa-reddit-alien"></i>
+        </a>
+        {% endif %}
+    
+        {% if card.whatsapp_number %}
+        <a href="https://wa.me/{{ card.whatsapp_number }}" class="btn btn-light d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; border-radius: 50%;" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        {% endif %}
+    
+        {% if card.email %}
+        <a href="mailto:{{ card.email }}" class="btn btn-light d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; border-radius: 50%;" target="_blank">
+            <i class="fas fa-envelope"></i>
+        </a>
+        {% endif %}
+    
+        {% if card.linkdin %}
+        <a href="{{ card.linkdin }}" class="btn btn-light d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; border-radius: 50%;" target="_blank">
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+        {% endif %}
+    
+        {% if card.pinterest %}
+        <a href="{{ card.pinterest }}" class="btn btn-light d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; border-radius: 50%;" target="_blank">
+            <i class="fab fa-pinterest"></i>
+        </a>
+        {% endif %}
+    </div>
+    
+</div>
+
+  
+</div>
+
+
+<div class="edit_button justify-content-center d-flex">
+  {% if is_owner %}
+    <a href="{% url 'edit_card' %}" class="btn btn-primary">Edit Card</a>
+  {% endif %}
+</div>
+<!-- Floating Buttons -->
+<div class="floating-buttons" id="floating-buttons">
+  <!-- Left Button -->
+  <a href="https://webstimulate.in/" target="_blank" class="floating-button left-btn">
+      <img src="{% static 'logo.png' %}" alt="Webstimulate Logo" class="button-logo"> 
+  </a>
+
+  <!-- Right Button -->
+  <a href="#" class="floating-button right-btn" id="share-btn">
+      <i class="fas fa-share-alt"></i> Share
+  </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.getElementById('share-btn').addEventListener('click', function () {
+      if (navigator.share) {
+          navigator.share({
+              title: 'Check out this Business Card',
+              url: window.location.href
+          })
+          .then(() => console.log('Thanks for sharing!'))
+          .catch(console.error);
+      } else {
+          alert('Web Share API is not supported in your browser. Copy the link manually!');
+      }
+  });
+</script>
+<script>
+  const floatingButtons = document.getElementById('floating-buttons');
+  let lastScrollTop = 0;
+
+  // Initially hide the floating buttons
+  floatingButtons.style.transform = 'translateY(100px)';
+  floatingButtons.style.opacity = '0';
+  floatingButtons.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+
+  window.addEventListener('scroll', function () {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      // Show buttons when scrolling downward
+      if (scrollTop > lastScrollTop) {
+          floatingButtons.style.transform = 'translateY(0)';
+          floatingButtons.style.opacity = '1';
+      } else {
+          // Hide buttons when scrolling upward
+          floatingButtons.style.transform = 'translateY(100px)';
+          floatingButtons.style.opacity = '0';
+      }
+
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+  });
+
+  document.getElementById('share-btn').addEventListener('click', function () {
+      if (navigator.share) {
+          navigator.share({
+              title: 'Check out this Business Card',
+              url: window.location.href
+          })
+          .then(() => console.log('Thanks for sharing!'))
+          .catch(console.error);
+      } else {
+          alert('Web Share API is not supported in your browser. Copy the link manually!');
+      }
+  });
+</script>
+
+</body>
+</html>
+
