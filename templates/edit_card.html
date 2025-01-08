@@ -36,7 +36,7 @@
                         <h2>Edit Your Business Card</h2>
                     </div>
                     <div class="card-body">
-                        <form method="POST" enctype="multipart/form-data" class="row g-3" action="{% url 'dashboard' card.unique_id %}">
+                        <form method="POST" enctype="multipart/form-data" class="row g-3">
                             {% csrf_token %}
                             <!-- Name -->
                             <div class="col-md-6">

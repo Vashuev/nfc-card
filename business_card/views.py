@@ -17,7 +17,7 @@ def edit_card(request):
 		if form.is_valid():
 			print("form is valid")
 			form.save()
-			return redirect('dashboard')
+			return redirect('dashboard', unique_id = card.unique_id)
 	else:
 		form = BusinessCardForm(instance=card)
 	return render(request, 'edit_card.html', {'form': form, 'card': card})
