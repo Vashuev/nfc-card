@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8hx7t^r+g*)fs*djpxd^h+itq3jn^3o(yfokr9l!_71#u$)rr_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG =  False
 
 ALLOWED_HOSTS = ["127.0.0.1","backend.webstimulate.in"]
 
@@ -125,6 +125,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "static"] 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Base url to serve media files
 MEDIA_URL = '/media/'
@@ -144,3 +145,7 @@ EMAIL_HOST_USER = "webstimulate.in@gmail.com"
 EMAIL_HOST_PASSWORD = "fkhdnisfvxpmvxwr"
 EMAIL_USE_TLS= True
 DEFAULT_FROM_EMAIL = 'Webstimulate <webstimulate.in@gmail.com>'
+
+CSRF_TRUSTED_ORIGINS = [
+	"https://backend.webstimulate.in",
+]
