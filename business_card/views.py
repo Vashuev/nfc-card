@@ -10,13 +10,15 @@ def dashboard(request, unique_id):
 
 @login_required
 def edit_card(request):
-    card = get_object_or_404(BusinessCard, user=request.user)
-    if request.method == 'POST':
-        form = BusinessCardForm(request.POST, request.FILES, instance=card)
-        if form.is_valid():
-            form.save()
-            return redirect('dashboard')
-    else:
-        form = BusinessCardForm(instance=card)
-    return render(request, 'edit_card.html', {'form': form, 'card': card})
+	card = get_object_or_404(BusinessCard, user=request.user)
+	if request.method == 'POST':
+		form = BusinessCardForm(request.POST, request.FILES, instance=card)
+		print("checking post method")
+		if form.is_valid():
+			print("form is valid")
+			form.save()
+			return redirect('dashboard')
+	else:
+		form = BusinessCardForm(instance=card)
+	return render(request, 'edit_card.html', {'form': form, 'card': card})
 

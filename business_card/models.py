@@ -30,9 +30,9 @@ class BusinessCard(models.Model):
     qr_code = models.ImageField(upload_to='qrcodes/', blank=True, null=True)
     
     # Customizable colors
-    primary_color = models.CharField(max_length=7, default="#FFFFFF")  # Background of the entire card
-    seconday_color = models.CharField(max_length=7, default="#ffffff")  # Background of the details box
+    primary_color = models.CharField(max_length=7, default="#701B98")  # Background of the entire card
+    seconday_color = models.CharField(max_length=7, default="#9E0505")  # Background of the details box
 
     def __str__(self):
-        return self.name
+        return self.name + "" + str(self.unique_id)
 
